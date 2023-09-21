@@ -11,12 +11,11 @@
             <a href="{{ url('users/create') }}" class="btn btn-sm btn-success">
                 Create user
             </a>
-            @if (!empty($message))
-                <div class="alert alert-success mt-3">
-                    {{ $message }}
+            @if (session()->has('message'))
+                <div class="{{ session()->get('class') }}">
+                    {{ session()->get('message') }}
                 </div>
             @endif
-
             <table class="table table-stripped table-bordered table-hover text-center mt-2">
                 <thead>
                     <tr>
@@ -59,6 +58,7 @@
                 alertify.confirm("Are you sure for delete this user ?",
                     function() {
                         axios.delete(url).then(response => {
+                            console.log(response);
                             alertify
                                 .alert("Data Deleted.", () => {
                                     window.location.href = '/users';
